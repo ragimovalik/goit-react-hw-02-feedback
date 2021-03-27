@@ -6,12 +6,17 @@ import './App.css';
 
 class App extends Component {
   state = {
-    good: 1,
-    neutral: 2,
-    bad: 3,
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
 
-  changer = nameOf => {
+  changer(nameOf) {
+    return this.setState(prevState => ({
+      [nameOf]: prevState[nameOf] + 1,
+    }));
+
+    /*
     switch (nameOf) {
       case 'good':
         this.setState(prevState => ({
@@ -33,8 +38,8 @@ class App extends Component {
 
       default:
         console.log('nononono');
-    }
-  };
+    }*/
+  }
 
   countTotalFeedback() {
     return Object.values(this.state).reduce((acc, num) => num + acc, 0);
@@ -44,7 +49,7 @@ class App extends Component {
     return Object.values(this.state).reduce((acc, num) => {
       const percentageCounter =
         (this.state.good / this.countTotalFeedback()) * 100;
-      return Math.floor(percentageCounter);
+      return Math.floor(percentageCounter) || null;
     }, 0);
   }
 
@@ -69,7 +74,10 @@ class App extends Component {
         <TitleOfSection text={'Please leave feedback'} />
         <Buttons
           buttonsNames={buttonsNames}
-          onClick={event => this.changer(event.target.textContent)}
+          onClick={event => {
+            console.log(event.target.name, event.currentTarget);
+            return this.changer(event.target.textContent);
+          }}
         />
         <TitleOfSection text={'Statistics'} />
         <StatisticsTable rating={statObj} />
