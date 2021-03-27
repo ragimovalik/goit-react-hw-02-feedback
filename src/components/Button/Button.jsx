@@ -3,7 +3,9 @@ import { createUseStyles } from 'react-jss';
 
 console.dir(createUseStyles);
 
-const Button = ({ btnText }) => <button>{btnText}</button>;
+const Button = ({ btnText, onClick }) => (
+  <button onClick={onClick}>{btnText}</button>
+);
 
 Button.propTypes = {
   btnText: PropTypes.string.isRequired,

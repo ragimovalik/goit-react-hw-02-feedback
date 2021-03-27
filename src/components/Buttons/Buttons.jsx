@@ -1,13 +1,22 @@
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
-const Buttons = () => {
+const Buttons = ({ buttonsNames }) => {
   return (
     <>
-      <Button btnText={'Good'} />
-      <Button btnText={'Neutral'} />
-      <Button btnText={'Bad'} />
+      {buttonsNames.map(btnName => (
+        <Button
+          key={btnName}
+          btnText={btnName}
+          onClick={() => console.log('clicked on button: ', btnName)}
+        />
+      ))}
     </>
   );
+};
+
+Buttons.propTypes = {
+  buttonsNames: PropTypes.arrayOf(PropTypes.string.isRequired),
 };
 
 export default Buttons;
