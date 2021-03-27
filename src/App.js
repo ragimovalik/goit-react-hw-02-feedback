@@ -6,22 +6,73 @@ import './App.css';
 
 class App extends Component {
   state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+    good: 1,
+    neutral: 2,
+    bad: 3,
   };
 
+  changer = nameOf => {
+    switch (nameOf) {
+      case 'good':
+        this.setState(prevState => ({
+          good: prevState.good + 1,
+        }));
+        break;
+
+      case 'neutral':
+        this.setState(prevState => ({
+          neutral: prevState.neutral + 1,
+        }));
+        break;
+
+      case 'bad':
+        this.setState(prevState => ({
+          bad: prevState.bad + 1,
+        }));
+        break;
+
+      default:
+        console.log('nononono');
+    }
+  };
+
+  countTotalFeedback() {
+    return Object.values(this.state).reduce((acc, num) => num + acc, 0);
+  }
+
+  countPositiveFeedbackPercentage() {
+    return Object.values(this.state).reduce((acc, num) => {
+      const percentageCounter =
+        (this.state.good / this.countTotalFeedback()) * 100;
+      return Math.floor(percentageCounter);
+    }, 0);
+  }
+
   render() {
-    // console.log(this.state);
     const buttonsNames = Object.keys(this.state);
+    const statObj = {
+      ...this.state,
+      totalFeedback: this.countTotalFeedback(),
+      totalPositiveFeedback: this.countPositiveFeedbackPercentage(),
+    };
+
+    // console.log(statObj);
+
+    // console.log(
+    //   this.countTotalFeedback(),
+    //   this.countPositiveFeedbackPercentage(),
+    // );
 
     return (
       <>
         <h1>HomeWork of React #2</h1>
         <TitleOfSection text={'Please leave feedback'} />
-        <Buttons buttonsNames={buttonsNames} />
+        <Buttons
+          buttonsNames={buttonsNames}
+          onClick={event => this.changer(event.target.textContent)}
+        />
         <TitleOfSection text={'Statistics'} />
-        <StatisticsTable rating={this.state} />
+        <StatisticsTable rating={statObj} />
       </>
     );
   }

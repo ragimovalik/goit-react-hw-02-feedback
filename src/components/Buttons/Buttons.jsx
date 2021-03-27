@@ -1,18 +1,10 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
-const Buttons = ({ buttonsNames }) => {
-  return (
-    <>
-      {buttonsNames.map(btnName => (
-        <Button
-          key={btnName}
-          btnText={btnName}
-          onClick={() => console.log('clicked on button: ', btnName)}
-        />
-      ))}
-    </>
-  );
+const Buttons = ({ buttonsNames, onClick }) => {
+  return buttonsNames.map(btnName => (
+    <Button key={btnName} btnText={btnName} onClick={onClick} />
+  ));
 };
 
 Buttons.propTypes = {
