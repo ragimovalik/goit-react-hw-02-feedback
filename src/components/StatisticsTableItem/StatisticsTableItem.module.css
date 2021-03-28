@@ -1,0 +1,26 @@
+.Stats__item {
+  display: block;
+  width: 250px;
+  height: 35px;
+  padding: 5px;
+  border-radius: 8px;
+  background-color: lightgray;
+}
+
+.Stats__item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.Stats__name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.Stats__digit {
+}

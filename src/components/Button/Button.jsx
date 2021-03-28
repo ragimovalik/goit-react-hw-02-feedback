@@ -1,10 +1,30 @@
 import PropTypes from 'prop-types';
-import { createUseStyles } from 'react-jss';
+import styles from './Button.module.css';
 
-console.dir(createUseStyles);
+const bgcSetter = name => {
+  switch (name) {
+    case 'good':
+      return '#1496bb';
 
-const Button = ({ btnText, onClick }) => (
-  <button onClick={onClick}>{btnText}</button>
+    case 'neutral':
+      return '#f26d21';
+
+    case 'bad':
+      return '#cd594a';
+
+    default:
+      return 'ligthgray';
+  }
+};
+
+const Button = ({ btnText, onLeaveFeedback }) => (
+  <button
+    style={{ backgroundColor: bgcSetter(btnText) }}
+    className={styles.Button}
+    onClick={onLeaveFeedback}
+  >
+    {btnText}
+  </button>
 );
 
 Button.propTypes = {

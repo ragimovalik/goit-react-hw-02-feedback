@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import TitleOfSection from './components/TitleOfSection/TitleOfSection';
+import PageTitle from './components/PageTitle/PageTitle';
+import Section from './components/Section/Section';
 import StatisticsTable from './components/StatisticsTable/StatisticsTable';
-import Buttons from './components/Buttons/Buttons';
+import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
 import './App.css';
 
 class App extends Component {
@@ -11,12 +12,71 @@ class App extends Component {
     bad: 0,
   };
 
-  changer(nameOf) {
+  onLeaveFeedback(nameOf) {
     return this.setState(prevState => ({
       [nameOf]: prevState[nameOf] + 1,
     }));
+  }
 
-    /*
+  countTotalFeedback() {
+    return Object.values(this.state).reduce((acc, num) => num + acc, 0);
+  }
+
+  countPositiveFeedbackPercentage() {
+    return Object.values(this.state).reduce((acc, num) => {
+      const percentageCounter =
+        (this.state.good / this.countTotalFeedback()) * 100;
+      return Math.floor(percentageCounter) || null;
+    }, 0);
+  }
+
+  render() {
+    const buttonsNames = Object.keys(this.state);
+    const { good, neutral, bad } = this.state;
+    const total = this.countTotalFeedback();
+    const positivePercentage = this.countPositiveFeedbackPercentage();
+
+    return (
+      <>
+        <PageTitle title={'Cafe Xpresso at the TrainStation'} />
+
+        <Section title={'Please leave feedback'}>
+          <FeedbackOptions
+            options={buttonsNames}
+            onLeaveFeedback={event => {
+              return this.onLeaveFeedback(event.target.textContent);
+            }}
+          />
+        </Section>
+
+        <Section title={'Statistics'}>
+          <StatisticsTable
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercentage={positivePercentage}
+          />
+        </Section>
+      </>
+    );
+  }
+}
+
+export default App;
+
+/*
+    // Object for props
+    const statObj = {
+      ...this.state,
+      totalFeedback: this.countTotalFeedback(),
+      totalPositiveFeedback: this.countPositiveFeedbackPercentage(),
+    };
+    //USAGE in Render 
+    <StatisticsTable rating={statObj} />
+    */
+
+/*
     switch (nameOf) {
       case 'good':
         this.setState(prevState => ({
@@ -39,51 +99,17 @@ class App extends Component {
       default:
         console.log('nononono');
     }*/
-  }
+/*
+        {total > 0 ? (
+          <Section title={'Statistics'}>
+            <StatisticsTable
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={positivePercentage}
+            />
+          </Section>
+        ) : null}
 
-  countTotalFeedback() {
-    return Object.values(this.state).reduce((acc, num) => num + acc, 0);
-  }
-
-  countPositiveFeedbackPercentage() {
-    return Object.values(this.state).reduce((acc, num) => {
-      const percentageCounter =
-        (this.state.good / this.countTotalFeedback()) * 100;
-      return Math.floor(percentageCounter) || null;
-    }, 0);
-  }
-
-  render() {
-    const buttonsNames = Object.keys(this.state);
-    const statObj = {
-      ...this.state,
-      totalFeedback: this.countTotalFeedback(),
-      totalPositiveFeedback: this.countPositiveFeedbackPercentage(),
-    };
-
-    // console.log(statObj);
-
-    // console.log(
-    //   this.countTotalFeedback(),
-    //   this.countPositiveFeedbackPercentage(),
-    // );
-
-    return (
-      <>
-        <h1>HomeWork of React #2</h1>
-        <TitleOfSection text={'Please leave feedback'} />
-        <Buttons
-          buttonsNames={buttonsNames}
-          onClick={event => {
-            console.log(event.target.name, event.currentTarget);
-            return this.changer(event.target.textContent);
-          }}
-        />
-        <TitleOfSection text={'Statistics'} />
-        <StatisticsTable rating={statObj} />
-      </>
-    );
-  }
-}
-
-export default App;
+*/

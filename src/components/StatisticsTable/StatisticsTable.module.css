@@ -1,0 +1,10 @@
+.Stats__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 5px;
+
+  transition: opacity 400ms linear;
+}
