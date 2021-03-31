@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import StatisticsTableItem from '../StatisticsTableItem/StatisticsTableItem';
 import styles from './StatisticsTable.module.css';
 
@@ -15,8 +15,10 @@ const StatisticsTable = props => {
   );
 };
 
-// StatisticsTable.propTypes = {
-//   rating: PropTypes.arrayOf(PropTypes.string.isRequired),
-// };
+StatisticsTable.propTypes = {
+  rating: PropTypes.arrayOf(PropTypes.string.isRequired),
+};
 
 export default StatisticsTable;
+
+//'No Feedback Given'

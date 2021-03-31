@@ -6,7 +6,7 @@ const StatisticsTableItem = ({ ratingBlock }) => {
     <li className={styles.Stats__item}>
       <div className={styles.Stats__name}>
         {ratingBlock[0] === 'positivePercentage'
-          ? 'Positive Feedback'
+          ? 'Positive Feedback (%)'
           : ratingBlock[0]}
         <span className={styles.Stats__digit}>{ratingBlock[1]}</span>
       </div>
@@ -15,7 +15,7 @@ const StatisticsTableItem = ({ ratingBlock }) => {
 };
 
 StatisticsTableItem.propTypes = {
-  ratingBlock: PropTypes.array,
+  ratingBlock: PropTypes.array.isRequired,
 };
 
 export default StatisticsTableItem;
