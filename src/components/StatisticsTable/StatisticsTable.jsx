@@ -2,9 +2,21 @@ import PropTypes from 'prop-types';
 import StatisticsTableItem from '../StatisticsTableItem/StatisticsTableItem';
 import styles from './StatisticsTable.module.css';
 
-const StatisticsTable = props => {
-  const ratingArr = Object.entries(props);
-  const sectionShow = props.total ? 1 : 0;
+const StatisticsTable = ({
+  good,
+  bad,
+  neutral,
+  positivePercentage = 0,
+  total,
+}) => {
+  const ratingArr = Object.entries({
+    good,
+    bad,
+    neutral,
+    total,
+    positivePercentage,
+  });
+  const sectionShow = total ? 1 : 0;
 
   return (
     <ul style={{ opacity: sectionShow }} className={styles['Stats__list']}>
@@ -20,5 +32,3 @@ StatisticsTable.propTypes = {
 };
 
 export default StatisticsTable;
-
-//'No Feedback Given'
