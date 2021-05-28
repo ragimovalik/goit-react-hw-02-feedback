@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import styles from './StatisticsTableItem.module.css';
 
 const StatisticsTableItem = ({ ratingBlock }) => {
+  console.log(ratingBlock);
+
   return (
     <li className={styles.Stats__item}>
       <div className={styles.Stats__name}>

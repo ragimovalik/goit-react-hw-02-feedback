@@ -3,6 +3,7 @@ import PageTitle from './components/PageTitle/PageTitle';
 import Section from './components/Section/Section';
 import StatisticsTable from './components/StatisticsTable/StatisticsTable';
 import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
+import Notification from './components/Notification/Notification';
 import './App.css';
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
 
   onLeaveFeedback(nameOf) {
     return this.setState(prevState => ({
-      [nameOf]: prevState[nameOf] + 1,
+      [nameOf]: ++prevState[nameOf],
     }));
   }
 
@@ -38,7 +39,7 @@ class App extends Component {
 
     return (
       <>
-        <PageTitle title={'Cafe Xpresso at the TrainStation'} />
+        <PageTitle title={'Cafe X-presso'} />
 
         <Section title={'Please leave feedback'}>
           <FeedbackOptions
@@ -50,13 +51,17 @@ class App extends Component {
         </Section>
 
         <Section title={'Statistics'}>
-          <StatisticsTable
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={total}
-            positivePercentage={positivePercentage}
-          />
+          {total ? (
+            <StatisticsTable
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={positivePercentage ? positivePercentage : 0}
+            />
+          ) : (
+            <Notification message="No feedback given" />
+          )}
         </Section>
       </>
     );
@@ -64,29 +69,3 @@ class App extends Component {
 }
 
 export default App;
-
-/*
-    // Object for props
-    const statObj = {
-      ...this.state,
-      totalFeedback: this.countTotalFeedback(),
-      totalPositiveFeedback: this.countPositiveFeedbackPercentage(),
-    };
-    //USAGE in Render 
-    <StatisticsTable rating={statObj} />
-    */
-
-/*
-        {total > 0 ? (
-          <Section title={'Statistics'}>
-            <StatisticsTable
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={total}
-              positivePercentage={positivePercentage}
-            />
-          </Section>
-        ) : null}
-
-*/
