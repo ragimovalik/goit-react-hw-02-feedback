@@ -13,9 +13,9 @@ class App extends Component {
     bad: 0,
   };
 
-  onLeaveFeedback(nameOf) {
+  onLeaveFeedback(feedbackOption) {
     return this.setState(prevState => ({
-      [nameOf]: ++prevState[nameOf],
+      [feedbackOption]: ++prevState[feedbackOption],
     }));
   }
 
